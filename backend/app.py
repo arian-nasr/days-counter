@@ -1,17 +1,12 @@
 from os import getenv
 from flask import Flask, render_template, request
-from pydantic import BaseModel, Field, ValidationError
-from datetime import datetime
+from pydantic import ValidationError
+from schemas import DayUpdatePayload
 
 MYSQL_HOST = getenv("MYSQL_HOST")
 MYSQL_USER = getenv("MYSQL_USER")
 MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
 MYSQL_DB = getenv("MYSQL_DB")
-
-class DayUpdatePayload(BaseModel):
-    date: str
-    value: int = Field(..., ge=0, le=100)
-    last_updated: str
 
 app = Flask(__name__)
 

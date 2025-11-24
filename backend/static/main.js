@@ -9,7 +9,7 @@ function startProgress() {
         } else {
             clearInterval(interval);
         }
-    }, 100); // update every 100ms
+    }, 50); // update every 50ms
 }
 
 function stopProgress() {

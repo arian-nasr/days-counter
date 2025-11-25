@@ -10,7 +10,7 @@ MYSQL_DB = getenv("MYSQL_DB")
 
 app = Flask(__name__)
 
-@app.route("/ping")
+@app.route("/api/ping")
 def ping():
     return "pong", 200
 
@@ -18,7 +18,7 @@ def ping():
 def index():
     return render_template("index.html")
 
-@app.route("/update_day", methods=["POST"])
+@app.route("/api/update_day", methods=["POST"])
 def update_day():
     try:
         payload = DayUpdatePayload(**request.json)

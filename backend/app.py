@@ -18,7 +18,7 @@ def ping():
 def index():
     return render_template("index.html")
 
-@app.route("/get_day/<str:date_str>")
+@app.route("/get_day/<string:date_str>")
 def get_day(date_str):
     try:
         validated_date = DateModel(day=date_str)

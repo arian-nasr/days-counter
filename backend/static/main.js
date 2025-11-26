@@ -23,11 +23,18 @@ mainProgress.addEventListener('mouseleave', stopProgress);
 document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
     console.log('Fetching data for date:', today);
+    getDayData(today).then(data => {
+        if (data) {
+            console.log('Data for today:', data);
+        } else {
+            console.log('No data received for today.');
+        }
+    });
 });
 
 async function getDayData(date) {
     try {
-        const response = await fetch(`/api/daydata?date=${date}`);
+        const response = await fetch(`/get_day/${date}`);
         if (response.status === 200) {
             const data = await response.json();
             return data;

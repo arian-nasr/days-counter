@@ -2,6 +2,7 @@ from os import getenv
 from flask import Flask, render_template, request
 from pydantic import ValidationError
 from schemas import DayUpdatePayload, DateModel
+from db_connector import db_get_day
 
 MYSQL_HOST = getenv("MYSQL_HOST")
 MYSQL_USER = getenv("MYSQL_USER")
@@ -27,8 +28,10 @@ def get_day(date_str):
     except Exception as e:
         return "internal server error", 500
 
-    # placeholder 
-    return {"date": validated_date.day, "value": 42}, 200
+    day_data = db_get_day(validated_date.day.isoformat())
+    if day_data is None:
+        return "day not found", 404
+    return day_data, 200
 
 @app.route("/update_day", methods=["POST"])
 def update_day():

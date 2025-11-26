@@ -4,7 +4,7 @@ from os import getenv
 MYSQL_HOST = getenv("MYSQL_HOST")
 MYSQL_USER = getenv("MYSQL_USER")
 MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
-MYSQL_DB = getenv("MYSQL_DB")
+MYSQL_DB = getenv("MYSQL_DATABASE")
 
 def db_create_table_if_not_exists():
     conn = mysql.connector.connect(

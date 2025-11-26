@@ -1,13 +1,7 @@
-from os import getenv
 from flask import Flask, render_template, request
 from pydantic import ValidationError
 from schemas import DayUpdatePayload, DateModel
 from db_connector import db_get_day, db_create_table_if_not_exists
-
-MYSQL_HOST = getenv("MYSQL_HOST")
-MYSQL_USER = getenv("MYSQL_USER")
-MYSQL_PASSWORD = getenv("MYSQL_PASSWORD")
-MYSQL_DB = getenv("MYSQL_DB")
 
 db_create_table_if_not_exists()
 

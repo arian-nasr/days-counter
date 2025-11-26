@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 from pydantic import ValidationError
 from schemas import DayUpdatePayload, DateModel
-from db_connector import db_get_day, db_create_table_if_not_exists
+from db_connector import db_get_day, db_create_table_if_not_exists, add_test_day_data
 
 db_create_table_if_not_exists()
+add_test_day_data()
 
 app = Flask(__name__)
 

@@ -25,6 +25,25 @@ def db_create_table_if_not_exists():
     cursor.close()
     conn.close()
 
+def add_test_day_data():
+    conn = mysql.connector.connect(
+        host=MYSQL_HOST,
+        user=MYSQL_USER,
+        password=MYSQL_PASSWORD,
+        database=MYSQL_DB
+    )
+    cursor = conn.cursor()
+    insert_query = "INSERT IGNORE INTO days (date, value) VALUES (%s, %s)"
+    test_data = [
+        ('2025-11-25', 10),
+        ('2025-11-26', 20),
+        ('2025-11-27', 30)
+    ]
+    cursor.executemany(insert_query, test_data)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 def db_get_day(date_str):
     conn = mysql.connector.connect(
         host=MYSQL_HOST,

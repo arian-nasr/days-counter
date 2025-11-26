@@ -1,7 +1,7 @@
 from os import getenv
 from flask import Flask, render_template, request
 from pydantic import ValidationError
-from schemas import DayUpdatePayload
+from schemas import DayUpdatePayload, DateModel
 
 MYSQL_HOST = getenv("MYSQL_HOST")
 MYSQL_USER = getenv("MYSQL_USER")
@@ -17,6 +17,18 @@ def ping():
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/get_day/<str:date_str>")
+def get_day(date_str):
+    try:
+        validated_date = DateModel(day=date_str)
+    except ValidationError as e:
+        return "invalid date format", 400
+    except Exception as e:
+        return "internal server error", 500
+
+    # placeholder 
+    return {"date": validated_date.day, "value": 42}, 200
 
 @app.route("/update_day", methods=["POST"])
 def update_day():

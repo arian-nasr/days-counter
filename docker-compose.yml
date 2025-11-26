@@ -31,7 +31,7 @@ services:
       mysql:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/ping"] 
+      test: ["CMD", "curl", "-f", "http://localhost:23186/ping"] 
       interval: 10s
       timeout: 5s
       retries: 5
